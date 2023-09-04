@@ -4,6 +4,7 @@ import { io, Socket } from 'socket.io-client';
 interface ChatProps {
     server: string;
     username: string;
+    roomName: string;
 }
 
 interface Message {
@@ -11,7 +12,7 @@ interface Message {
     message: string;
 }
 
-const Chat: React.FC<ChatProps> = ({ server, username }) => {
+const Chat: React.FC<ChatProps> = ({ server, username, roomName }) => {
     const [socket, setSocket] = useState<Socket | null>(null);
     const [message, setMessage] = useState<string>('');
     const [messages, setMessages] = useState<Message[]>([]);
@@ -36,7 +37,7 @@ const Chat: React.FC<ChatProps> = ({ server, username }) => {
     const sendMessage = () => {
         if (socket && message.trim() !== '') {
             // Enviar mensagem para o servidor
-            const messageObject = { username, message };
+            const messageObject = { username, message, roomName };
             socket.emit('message', JSON.stringify(messageObject));
             setMessage('');
         }

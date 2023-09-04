@@ -5,7 +5,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <Chat username='Test' server='http://localhost:3001'/>
+        <Chat username='Test' roomName='Matematica' server='http://localhost:3001'/>
       </header>
     </div>
   );
